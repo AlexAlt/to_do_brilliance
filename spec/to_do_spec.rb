@@ -1,7 +1,13 @@
 require('rspec')
 require('to_do')
 
+
+
 describe(Task) do
+  before() do
+    Task.clear()
+  end
+
   describe('#description') do
     it('lets you add give a description of a task') do
       test_task = Task.new('put your pants on')
