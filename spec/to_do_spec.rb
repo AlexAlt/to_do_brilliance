@@ -15,4 +15,11 @@ describe(Task) do
     end
   end
 
+  describe('#save') do
+    it('adds a task to a list of saved tasks') do
+      test_task = Task.new("put your hat on")
+      test_task.save()
+      expect(Task.all()).to(eq([test_task]))
+    end
+  end
 end
