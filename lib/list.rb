@@ -25,4 +25,21 @@ class List
   define_method(:==) do |another_list|
     self.name().==(another_list.name()).&(self.id().==(another_list.id()))
   end
+
+  define_method(:tasks) do
+    returned_tasks = DB.exec("SELECT * FROM tasks WHERE list_id = #{@id}")
+    tasks = []
+    returned_tasks.each() do |task|
+      description = task.fetch('description')
+      id = task.fetch('id').to_i()
+      list_id = task.fetch('list_id').to_i()
+      tasks.push(Task.new({:id => id, :description => description, :list_id => list_id}))
+    end
+    tasks
+  end
+
+  define_method(:add_tasks) do |task|
+binding.pry
+    DB.exec("UPDATE tasks SET list_id = #{@id} WHERE id = #{task.id()}")
+  end
 end

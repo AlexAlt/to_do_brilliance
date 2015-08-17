@@ -40,4 +40,25 @@ describe(List) do
     end
   end
 
+  describe('#tasks') do
+    it('returns all of the tasks in the list') do
+      list = List.new({:name => "Epicodus Stuff", :id => nil})
+      list.save()
+      expect(list.tasks()).to(eq([]))
+    end
+  end
+
+
+  describe('#add_tasks') do
+    it('adds task to list') do
+      test_list = List.new({:name => 'Epicodus stuff', :id => 2})
+      test_list.save()
+      test_task = Task.new({:id => nil, :description => "learn SQL", :list_id => nil})
+      test_task.save()
+      test_list.add_tasks(test_task)
+      expect(test_list.tasks()).to(eq([test_task]))
+    end
+  end
+
+
 end
