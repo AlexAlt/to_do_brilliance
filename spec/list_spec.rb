@@ -59,6 +59,14 @@ describe(List) do
       expect(test_list.tasks()).to(eq([test_task]))
     end
   end
-
+  describe('.find') do
+    it('finds the list by its ID') do
+    test_list = List.new(:name => "epicodus", :id => nil)
+    test_list.save()
+    test_list2 = List.new(:name => "home", :id => nil)
+    test_list2.save()
+    expect(List.find(test_list2.id)).to(eq(test_list2))
+    end
+  end
 
 end

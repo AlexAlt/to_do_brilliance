@@ -1,9 +1,10 @@
 class Task
   attr_reader(:id, :description, :list_id)
+  attr_writer(:list_id)
 
   define_method(:initialize) do |attributes|
     @description = attributes.fetch(:description)
-    @list_id = attributes.fetch(:list_id)
+    @list_id = attributes[:list_id]
     @id = attributes[:id]
   end
 

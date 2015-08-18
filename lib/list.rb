@@ -39,6 +39,17 @@ class List
   end
 
   define_method(:add_tasks) do |task|
-    DB.exec("UPDATE tasks SET list_id = #{@id} WHERE id = #{task}.id();")
+    task.list_id = @id
+    DB.exec("UPDATE tasks SET list_id = #{@id} WHERE id = #{task.id()};")
+  end
+  define_singleton_method(:find) do |ident|
+    found_list = nil
+
+    List.all().each() do |list|
+      if list.id().==(ident)
+        found_list = list
+      end
+    end
+    found_list
   end
 end
