@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+  <head>
+    <title>To-do list</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  </head>
+  <body>
+
+    <h1>List page for task</h1>
+
+
+  <p>There are no tasks on this list!</p>
+
+
+<form action="/tasks" method="post">
+  <input id="list_id" name="list_id" type="hidden" value="295">
+  <label for="description">Add your task</label>
+  <input id="description" name="description" type="text">
+
+  <button type="submit">Add it!!</button>
+</form>
+
+<div class="container">
+  <a href="/"><button class="btn">Home</a>
+</div>
+
+
+  </body>
+</html>
