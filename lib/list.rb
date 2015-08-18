@@ -39,7 +39,6 @@ class List
   end
 
   define_method(:add_tasks) do |task|
-binding.pry
-    DB.exec("UPDATE tasks SET list_id = #{@id} WHERE id = #{task.id()}")
+    DB.exec("UPDATE tasks SET list_id = #{@id} WHERE id = #{task}.id();")
   end
 end

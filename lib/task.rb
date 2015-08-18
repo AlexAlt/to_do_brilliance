@@ -4,7 +4,7 @@ class Task
   define_method(:initialize) do |attributes|
     @description = attributes.fetch(:description)
     @list_id = attributes.fetch(:list_id)
-    @id = attributes.fetch(:id)
+    @id = attributes[:id]
   end
 
   define_method(:description) do
@@ -18,7 +18,7 @@ class Task
       id = task.fetch('id').to_i()
       description = task.fetch('description')
       list_id = task.fetch('list_id').to_i()
-      tasks.push(Task.new({:id => id, :description => description, :list_id => list_id}))
+      tasks.push(Task.new({:description => description, :list_id => list_id, :id => id}))
     end
     tasks
   end
@@ -27,16 +27,15 @@ class Task
     if ! @list_id
       @list_id = "NULL"
     end
-    if ! @id
-      @id = "NULL"
-    end
-    DB.exec("INSERT INTO tasks (description, list_id) VALUES (#{@id}, '#{@description}', #{@list_id});")
+    result = DB.exec("INSERT INTO tasks (description, list_id) VALUES ('#{@description}', #{@list_id}) RETURNING id;")
+    @id = result.first().fetch("id").to_i()
   end
 
   # define_singleton_method(:clear) do
   #   @@all_tasks = []
   # end
 
-  define_method(:==) do |another_task|        self.description().==(another_task.description()).&(self.list_id().==(another_task.list_id())).&(self.id().==(another_task.id()))
+  define_method(:==) do |another_task|
+    self.description().==(another_task.description()).&(self.list_id().==(another_task.list_id())).&(self.id().==(another_task.id()))
   end
 end

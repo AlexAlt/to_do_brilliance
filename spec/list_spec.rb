@@ -53,7 +53,7 @@ describe(List) do
     it('adds task to list') do
       test_list = List.new({:name => 'Epicodus stuff', :id => 2})
       test_list.save()
-      test_task = Task.new({:id => nil, :description => "learn SQL", :list_id => nil})
+      test_task = Task.new({:description => "learn SQL", :list_id => nil})
       test_task.save()
       test_list.add_tasks(test_task)
       expect(test_list.tasks()).to(eq([test_task]))
