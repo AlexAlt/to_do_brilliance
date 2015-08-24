@@ -18,7 +18,7 @@ post('/lists') do
   list = List.new({:name => name, :id => nil})
   list.save()
   @lists = List.all()
-  erb(:to_do_success)
+  redirect("/")
 end
 
 get('/lists/:id') do
