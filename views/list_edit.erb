@@ -5,7 +5,16 @@
 
   <% @list.tasks().each do |task| %>
   <ul>
-    <li> <%= task.description() %> <%= task.due_date() %></li>
+    <li> <%= task.description() %> <%= task.due_date() %>
+      <ul class="style-unstyled">
+        <li>
+          <form action='/tasks/<%= task.id() %>' method='post'>
+            <input type="hidden" name='_method' value='delete'>
+            <button type='submit' class="btn-default">Task Complete</button>
+          </form>
+        </li>
+      </ul>
+    </li>
   </ul>
   <% end %>
 
