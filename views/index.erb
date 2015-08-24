@@ -16,3 +16,11 @@
 
   <button type="submit">Add it!!</button>
 </form>
+
+<p>All of your tasks:</p>
+
+<ul>
+  <% @tasks.not_done().each() do |task| %>
+    <li> <%= task.description %> <a href="/tasks/<% task.id() %>/edit">Update this task's description</a> </li>
+    <% end %>
+</ul>

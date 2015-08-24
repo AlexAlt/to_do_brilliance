@@ -1,0 +1,36 @@
+<h1>Update <%= @list.name() %></h1>
+
+<form action="/lists/<%= @list.id %>" method='post'>
+  <input name='_method' type='hidden' value='patch'>
+  <label for="name">Change list name</label>
+  <input id="name" name="name" type="text">
+
+  <button type='submit'>Update</button>
+</form>
+
+<form action='/lists/<%= @list.id() %>' method='post'>
+  <input type="hidden" name='_method' value='delete'>
+  <button type='submit'>Delete</button>
+</form>
+
+
+<% if @list.tasks().any?()%>
+
+  <% @list.tasks().each do |task| %>
+  <ul>
+    <li> <%= task.description() %></li>
+  </ul>
+  <% end %>
+
+
+<% else %>
+
+  <p>There are no tasks on this list!</p>
+
+<% end %>
+
+
+
+<div class="container">
+  <a href="/"><button class="btn">Home</a>
+</div>

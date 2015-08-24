@@ -1,15 +1,15 @@
-# I want the user to see a list of lists DONE
-# I want the user to add a list to the list of lists DONE
-# I want the user to see the tasks of a list
-# I want the user to add tasks to a specific list
-require('capybara/rspec')
-require('./app')
-require('launchy')
-require('spec_helper')
-
-Capybara.app = Sinatra::Application
-set(:show_exceptions, false)
-
+# # I want the user to see a list of lists DONE
+# # I want the user to add a list to the list of lists DONE
+# # I want the user to see the tasks of a list
+# # I want the user to add tasks to a specific list
+# require('capybara/rspec')
+# require('./app')
+# require('launchy')
+# require('spec_helper')
+#
+# Capybara.app = Sinatra::Application
+# set(:show_exceptions, false)
+# 
 # describe('adds a list to the home page', {:type => :feature}) do
 #   it('processes the user entry and adds a new list') do
 #     visit('/')
@@ -41,4 +41,4 @@ set(:show_exceptions, false)
 #     click_button('Add it!!')
 #     expect(page).to have_content("eggs")
 #   end
-end
+# end
