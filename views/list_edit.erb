@@ -1,24 +1,11 @@
-<h1>Update <%= @list.name() %></h1>
+<h1><%= @list.name() %></h1>
 
-<form action="/lists/<%= @list.id %>" method='post'>
-  <input name='_method' type='hidden' value='patch'>
-  <label for="name">Change list name</label>
-  <input id="name" name="name" type="text">
-
-  <button type='submit'>Update</button>
-</form>
-
-<form action='/lists/<%= @list.id() %>' method='post'>
-  <input type="hidden" name='_method' value='delete'>
-  <button type='submit'>Delete</button>
-</form>
-
-
+<h3>To-do:</h3>
 <% if @list.tasks().any?()%>
 
   <% @list.tasks().each do |task| %>
   <ul>
-    <li> <%= task.description() %></li>
+    <li> <%= task.description() %> <%= task.due_date() %></li>
   </ul>
   <% end %>
 
@@ -29,8 +16,31 @@
 
 <% end %>
 
+<p>Add a task</p>
+
+<form action="/lists/<%= @list.id %>/new" method="post">
+  <label for="description">Describe Task:</label>
+  <input id="description" name="description" type="text">
+
+  <label for="due_date">Give it a due date:</label>
+  <input id="due_date" name="due_date" type="text">
+  <button type="submit" class="btn-default">Add the task!</button>
+</form>
 
 
-<div class="container">
-  <a href="/"><button class="btn">Home</a>
-</div>
+<form action="/lists/<%= @list.id %>" method='post'>
+  <input name='_method' type='hidden' value='patch'>
+  <label for="name">Change list name</label>
+  <input id="name" name="name" type="text">
+
+  <button type='submit' class="btn-default">Rename</button>
+</form>
+
+
+<form action='/lists/<%= @list.id() %>' method='post'>
+  <input type="hidden" name='_method' value='delete'>
+  <button type='submit' class="btn-default">Delete list</button>
+</form>
+
+<br>
+<a href="/"><button class="btn">Home</a>

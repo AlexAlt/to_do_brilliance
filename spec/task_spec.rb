@@ -11,4 +11,5 @@ describe(Task) do
       expect(Task.not_done()).to(eq(not_done_tasks))
     end
   end
+
 end

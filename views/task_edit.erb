@@ -5,6 +5,13 @@
   <label for="description">Rename your task:</label>
   <input id="description" name="description" type="text">
 
-  <button type="submit">Update</button>
-
+  <button type="submit" class="btn-default">Update</button>
 </form>
+
+<br>
+<form action='/tasks/<%= @task.id() %>' method='post'>
+  <input type="hidden" name='_method' value='delete'>
+  <button type='submit' class="btn-default">Delete Task</button>
+</form>
+
+<p><a href="/">Home</a></p>

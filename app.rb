@@ -21,12 +21,39 @@ post('/lists') do
   redirect("/")
 end
 
+post('/tasks') do
+  @lists = List.all()
+  description = params.fetch("description")
+  due_date = params.fetch("due_date")
+  list_id = params.fetch("list_id")
+  task = Task.new({:description => description, :list_id => list_id, :done => false, :due_date => due_date, :id => nil})
+  task.save()
+  @tasks = Task.all()
+  redirect("/")
+end
+
+# delete('/tasks') do
+#   @tasks = Task.all().destroy()
+#   redirect("/")
+# end
+
 get('/lists/:id') do
   @list = List.find(params.fetch("id").to_i())
   erb(:list_edit)
 end
 
-patch ('/lists/:id') do
+post('/lists/:id/new') do
+  @lists = List.all()
+  description = params.fetch("description")
+  due_date = params.fetch("due_date")
+  list_id = params.fetch("id").to_i()
+  task = Task.new({:description => description, :list_id => list_id, :done => false, :due_date => due_date, :id => nil})
+  task.save()
+  @tasks = Task.all()
+  redirect("/lists/#{list_id}")
+end
+
+patch('/lists/:id') do
   name = params.fetch("name")
   id = params.fetch("id").to_i()
   @list = List.find(id)
@@ -43,6 +70,7 @@ end
 
 get('/tasks/:id/edit') do
   @task = Task.find(params.fetch("id").to_i())
+  @lists = List.all()
   erb(:task_edit)
 end
 
@@ -51,5 +79,12 @@ patch('/tasks/:id') do
   @task = Task.find(params.fetch("id").to_i())
   @task.update({:description => description})
   @tasks = Task.all()
+  redirect("/")
+end
+
+delete('/tasks/:id') do
+  id = params.fetch("id").to_i()
+  @task = Task.find(id)
+  @task.destroy()
   redirect("/")
 end
